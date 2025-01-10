@@ -1,0 +1,49 @@
+{% extends 'campaigns/base.html' %}
+{% block title %}Campaigns{% endblock %}
+{% block content %}
+<h1>Email Campaigns</h1>
+
+<!-- Campaign Creation Form -->
+<form method="post" class="mb-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Campaign</button>
+</form>
+
+<h2>Existing Campaigns</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th> <!-- Added this for Campaign IDs -->
+            <th>Subject</th>
+            <th>Group</th>
+            <th>Scheduled Time</th>
+            <th>SMTP Account</th>
+            <th>Sent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for campaign in campaigns %}
+        <tr>
+            <td>{{ campaign.id }}</td> <!-- Display Campaign ID -->
+            <td>{{ campaign.subject }}</td>
+            <td>{{ campaign.group.name }}</td>
+            <td>{{ campaign.scheduled_time }}</td>
+            <td>{{ campaign.smtp_account }}</td>
+            <td>{{ campaign.sent }}</td>
+            <td>
+                <!-- Send Campaign Button -->
+                <form method="post" action="{% url 'send_campaign' campaign.id %}">
+                    {% csrf_token %}
+                    <p>Campaign ID: {{ campaign.id }}</p>
+                    <button type="submit" class="btn btn-success">Send Campaign</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+

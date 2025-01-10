@@ -1,0 +1,10 @@
+{% extends 'campaigns/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container text-center">
+    <h1>Welcome to Blake</h1>
+    <p class="lead">Manage your email campaigns effortlessly.</p>
+    <a href="{% url 'smtp_config' %}" class="btn btn-primary btn-lg">Configure SMTP Settings</a>
+</div>
+{% endblock %}
+
