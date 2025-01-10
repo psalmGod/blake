@@ -25,7 +25,7 @@ DATABASEURL = 'postgresql://blakedb_user:GevDyNxZLPuVCmKprCVSutsWIbhjneYN@dpg-cu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['your-render-app.onrender.com']
+ALLOWED_HOSTS = ['https://blake-lnpz.onrender.com']
 
 
 # Application definition
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blake.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
