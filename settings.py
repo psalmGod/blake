@@ -25,7 +25,7 @@ DATABASEURL = 'postgresql://blakedb_user:GevDyNxZLPuVCmKprCVSutsWIbhjneYN@dpg-cu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://blake-lnpz.onrender.com']
+ALLOWED_HOSTS = ['blake-lnpz.onrender.com']
 
 
 # Application definition
