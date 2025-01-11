@@ -25,7 +25,7 @@ DATABASEURL = 'postgresql://blakedb_user:GevDyNxZLPuVCmKprCVSutsWIbhjneYN@dpg-cu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['blake-lnpz.onrender.com']
+ALLOWED_HOSTS = ['blake-lnpz.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jazzmin',
     'campaigns',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware', 
 ]
 
 ROOT_URLCONF = 'urls'
@@ -160,11 +158,3 @@ TWENTY_API_BASE_URL = "https://api.twenty.com/rest"
 SESSION_COOKIE_AGE = 3600  # 1 hour (in seconds)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Keep the session after closing the browser
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
-
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda request: True,  # Always show toolbar in debug mode
-    'INTERCEPT_REDIRECTS': False,  # Prevent the toolbar from interfering with redirects
-}

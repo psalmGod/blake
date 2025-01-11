@@ -18,7 +18,3 @@ urlpatterns = [
     path('email-groups/', views.email_groups, name='email_groups'),
     path('campaigns/', views.campaigns, name='campaigns'),
 ]
-
-if settings.DEBUG:  # Only include Debug Toolbar in debug mode
-    import debug_toolbar
-    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
