@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--(p1!k$8!iv*60^@6=_1=(38^33aswlixe6h!n&ktq_9nw&#fu'
 DATABASEURL = 'postgresql://blakedb_user:GevDyNxZLPuVCmKprCVSutsWIbhjneYN@dpg-cu0nod23esus738uftmg-a.oregon-postgres.render.com/blakedb'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['blake-lnpz.onrender.com', '127.0.0.1']
 

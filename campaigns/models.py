@@ -48,6 +48,6 @@ from .models import EmailCampaign, EmailLog
 def create_logs_for_campaign(sender, instance, created, **kwargs):
     if created:
         # Extract recipients from the associated EmailGroup
-        recipients = instance.group.emails
+        recipients = instance.group.email
         for recipient in recipients:
             EmailLog.objects.create(email_campaign=instance, recipient=recipient)
