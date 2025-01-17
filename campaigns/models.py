@@ -3,10 +3,12 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
+from django.db import models
+
 class EmailGroup(models.Model):
-    name = models.CharField(max_length=100, help_text="Name of the group")
-    emails = models.JSONField(help_text="List of email addresses in JSON format")
-    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=255, null=True, blank=True)  # Add this line
 
     def __str__(self):
         return self.name
