@@ -14,7 +14,7 @@ class EmailGroup(models.Model):
 class EmailCampaign(models.Model):
     group = models.ForeignKey(EmailGroup, on_delete=models.CASCADE, related_name='campaigns')
     subject = models.CharField(max_length=255, help_text="Subject of the email")
-    body = models.TextField(help_text="Body of the email")
+    body = models.TextField(help_text="Body of the emails")
     scheduled_time = models.DateTimeField(help_text="Time to send the emails")
     smtp_account = models.CharField(
         max_length=100,

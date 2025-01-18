@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 def send_email(smtp_account, sender_email, sender_password, recipient, subject, body):
-    smtp_host = "smtp.gmail.com" if smtp_account == "gmail" else "smtp.office365.com"
+    smtp_host = "smtp.gmail.com" if smtp_account == "gmail" else "smtp-mail.outlook.com"
     smtp_port = 587
 
     # Create the email
