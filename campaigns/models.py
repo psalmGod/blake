@@ -3,10 +3,16 @@ from django.db import models
 # Create your models here.
 from django.db import models
 
+from django.db import models
+
+from django.db import models
+from django.utils import timezone
+
 class EmailGroup(models.Model):
-    name = models.CharField(max_length=100, help_text="Name of the group")
-    emails = models.JSONField(help_text="List of email addresses in JSON format")
-    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)  # Add this line
 
     def __str__(self):
         return self.name
@@ -42,6 +48,6 @@ from .models import EmailCampaign, EmailLog
 def create_logs_for_campaign(sender, instance, created, **kwargs):
     if created:
         # Extract recipients from the associated EmailGroup
-        recipients = instance.group.emails
+        recipients = instance.group.email
         for recipient in recipients:
             EmailLog.objects.create(email_campaign=instance, recipient=recipient)

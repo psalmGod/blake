@@ -1,9 +1,18 @@
-import smtplib
 from email.mime.text import MIMEText
+import smtplib
 
+<<<<<<< HEAD
 def send_email(smtp_account, sender_email, sender_password, recipient, subject, body):
     smtp_host = "smtp.gmail.com" if smtp_account == "gmail" else "smtp-mail.outlook.com"
+=======
+def send_email(smtp_account, sender_email, sender_password, recipient, subject, body, first_name=None):
+    smtp_host = "smtp.gmail.com" if smtp_account == "gmail" else "smtp.office365.com"
+>>>>>>> 3e40c6b62f6bfc351ddfd34810adcf84238c6810
     smtp_port = 587
+
+    # Personalize the email body if first_name is provided
+    if first_name:
+        body = f"Hi {first_name},\n\n" + body
 
     # Create the email
     msg = MIMEText(body)

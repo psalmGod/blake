@@ -34,38 +34,27 @@ def send_campaign_emails(campaign_id, sender_email, sender_password, delay=5):
             log.sent_at = now()
             log.save()
             sleep(delay)  # Add delay between sending emails
+from celery import shared_task
+from .models import EmailCampaign, EmailLog, EmailGroup
+from .utils import send_email, check_replies
+
 @shared_task
-def send_campaign_emails_with_reply_check(campaign_id, sender_email, sender_password, delay=5):
+def send_campaign_emails_with_reply_check(campaign_id):
     campaign = EmailCampaign.objects.get(id=campaign_id)
-    logs = campaign.logs.filter(sent_at__isnull=True)
-
-    for log in logs:
-        # Check for replies before sending
-        replied_emails = check_replies(
-            smtp_account=campaign.smtp_account,
-            email_address=sender_email,
-            email_password=sender_password,
-            campaign_subject=campaign.subject,
-        )
-
-        if log.recipient in replied_emails:
-            log.replied = True
-            log.save()
-            continue  # Skip sending to recipients who replied
-
-        # Send the email
-        success = send_email(
-            smtp_account=campaign.smtp_account,
-            sender_email=sender_email,
-            sender_password=sender_password,
-            recipient=log.recipient,
-            subject=campaign.subject,
-            body=campaign.body,
-        )
-        if success:
-            log.sent_at = now()
-            log.save()
-            sleep(delay)
+    email_logs = EmailLog.objects.filter(campaign=campaign)
+    for log in email_logs:
+        if not check_replies(log.recipient):
+            send_email(
+                campaign.smtp_account,
+                campaign.sender_email,
+                campaign.sender_password,
+                log.recipient.email,
+                campaign.subject,
+                campaign.body,
+                log.recipient.first_name
+            )
+        else:
+            log.recipient.delete()  # Remove user from the list if they replied
 
 @shared_task
 def test_task(arg1, arg2):

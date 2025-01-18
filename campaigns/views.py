@@ -50,6 +50,11 @@ from .decorators import login_required
 from .tasks import send_campaign_emails
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import EmailCampaign
+from .tasks import send_campaign_emails_with_reply_check
+
 def send_campaign(request, campaign_id):
     if request.method == "POST":
         smtp_email = request.session.get("smtp_email")
@@ -59,7 +64,8 @@ def send_campaign(request, campaign_id):
             messages.error(request, "SMTP settings are not configured. Please configure them first.")
             return redirect("smtp_config")
 
-        send_campaign_emails(campaign_id, smtp_email, smtp_password, 15)
+        # Start the task to send emails with reply check
+        send_campaign_emails_with_reply_check.delay(campaign_id)
         messages.success(request, "Campaign sending started.")
         return redirect("campaigns")
 

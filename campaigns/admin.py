@@ -6,7 +6,7 @@ from .models import EmailGroup, EmailCampaign, EmailLog
 
 @admin.register(EmailGroup)
 class EmailGroupAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
+    list_display = ('name', 'email', 'first_name', 'created_at',)  # Add 'created_at' here
     search_fields = ('name',)
     list_filter = ('created_at',)
 

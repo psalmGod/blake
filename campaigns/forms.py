@@ -4,10 +4,13 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelChoiceField
 from .models import EmailGroup, EmailCampaign
 
+from django import forms
+from .models import EmailGroup
+
 class EmailGroupForm(forms.ModelForm):
     class Meta:
         model = EmailGroup
-        fields = ['name', 'emails']
+        fields = ['name', 'email', 'first_name']  # Add 'first_name' here
         widgets = {
             'emails': forms.Textarea(attrs={'placeholder': 'Enter emails as JSON (["email1@example.com", "email2@example.com"])'}),
         }
